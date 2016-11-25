@@ -63,7 +63,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
     NetworkClient ConnectLocalClient()
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager StartHost port:" + networkPort); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple StartHost port:" + networkPort); }
         networkAddress = "localhost";
         return StartClient();
     }
@@ -85,7 +85,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
         OnStopServer();
 
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager StopServer"); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple StopServer"); }
         server.Stop();
         server = null;
     }
@@ -99,7 +99,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
         OnStopClient();
 
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager StopClient"); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple StopClient"); }
         // only shutdown this client, not ALL clients.
         client.Disconnect();
         client.Shutdown();
@@ -126,7 +126,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnServerConnectCallback(NetworkMessage netMsg)
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnServerConnectInternal"); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnServerConnectCallback"); }
 
         netMsg.conn.SetMaxDelay(maxDelay);
         OnServerConnect(netMsg.conn);
@@ -134,14 +134,14 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnServerDisconnectCallback(NetworkMessage netMsg)
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnServerDisconnectInternal"); }
-        
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnServerDisconnectCallback"); }
+
         OnServerDisconnect(netMsg.conn);
     }
 
     protected virtual void OnServerErrorCallback(NetworkMessage netMsg)
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnServerErrorInternal"); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnServerErrorCallback"); }
 
         netMsg.ReadMessage(ErrorMessage);
         OnServerError(netMsg.conn, ErrorMessage.errorCode);
@@ -151,7 +151,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnClientConnectCallback(NetworkMessage netMsg)
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnClientConnectInternal"); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnClientConnectCallback"); }
 
         netMsg.conn.SetMaxDelay(maxDelay);
         OnClientConnect(netMsg.conn);
@@ -159,14 +159,14 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnClientDisconnectCallback(NetworkMessage netMsg)
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnClientDisconnectInternal"); }
+        if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnClientDisconnectCallback"); }
 
         OnClientDisconnect(netMsg.conn);
     }
 
     protected virtual void OnClientErrorCallback(NetworkMessage netMsg)
     {
-        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnClientErrorInternal"); }
+        if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnClientErrorCallback"); }
 
         netMsg.ReadMessage(ErrorMessage);
         OnClientError(netMsg.conn, ErrorMessage.errorCode);
