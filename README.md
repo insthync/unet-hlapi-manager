@@ -1,6 +1,6 @@
 # NetworkManagerSimple
 
-The simple network manager based on Unity's NetworkManager without players, scenes stuffs focus on network messages callback handles and multiple server purposes
+The simple network manager based on Unity's NetworkManager without players, scenes stuffs focus on network messages callback handles. Intenly made for multiple server purposes
 Class named NetworkManagerSimple will handles only an basic callbacks for Server connect, Server disconnect, Server error, Client connect, Client disconnect and Client error
 You can inherit the class to handles anatoher messages
 
