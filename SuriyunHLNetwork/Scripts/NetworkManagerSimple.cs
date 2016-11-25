@@ -49,7 +49,7 @@ public class NetworkManagerSimple : MonoBehaviour
         return client;
     }
 
-    public virtual NetworkClient StartHost()
+    public NetworkClient StartHost()
     {
         OnStartHost();
         if (StartServer())
@@ -108,14 +108,14 @@ public class NetworkManagerSimple : MonoBehaviour
 
     // ----------------------------- Message Registration --------------------------------
 
-    public virtual void RegisterServerMessages()
+    protected virtual void RegisterServerMessages()
     {
         server.RegisterHandler(MsgType.Connect, OnServerConnectCallback);
         server.RegisterHandler(MsgType.Disconnect, OnServerDisconnectCallback);
         server.RegisterHandler(MsgType.Error, OnServerErrorCallback);
     }
 
-    public virtual void RegisterClientMessages(NetworkClient client)
+    protected virtual void RegisterClientMessages(NetworkClient client)
     {
         client.RegisterHandler(MsgType.Connect, OnClientConnectCallback);
         client.RegisterHandler(MsgType.Disconnect, OnClientDisconnectCallback);
