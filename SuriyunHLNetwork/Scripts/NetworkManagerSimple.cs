@@ -11,13 +11,13 @@ public class NetworkManagerSimple : MonoBehaviour
     public bool isNetworkActive { get; protected set; }
 
     public bool useWebSockets;
-    public string networkAddress;
-    public int networkPort;
+    public string networkAddress = "localhost";
+    public int networkPort = 7770;
     public bool serverBindToIP;
     public string serverBindAddress;
     public ConnectionConfig connectionConfig;
     public int maxConnections = 4;
-    public float maxDelay;
+    public float maxDelay = 0.01f;
 
     public bool StartServer()
     {
