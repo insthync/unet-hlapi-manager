@@ -5,10 +5,11 @@ using System.Collections;
 
 public class NetworkManagerSimple : MonoBehaviour
 {
-    protected static ErrorMessage ErrorMessage = new ErrorMessage();
+    protected ErrorMessage errorMessage = new ErrorMessage();
     protected NetworkServerSimple server = null;
     protected NetworkClient client = null;
     public bool isNetworkActive { get; protected set; }
+    public bool isServerConnected { get; protected set; }
 
     public bool useWebSockets;
     public string networkAddress = "localhost";
@@ -19,7 +20,14 @@ public class NetworkManagerSimple : MonoBehaviour
     public int maxConnections = 4;
     public float maxDelay = 0.01f;
 
-    public bool StartServer()
+    protected virtual void Update()
+    {
+        if (server == null || !isNetworkActive)
+            return;
+        server.Update();
+    }
+
+    public virtual bool StartServer()
     {
         if (server != null)
             return true;
@@ -30,12 +38,14 @@ public class NetworkManagerSimple : MonoBehaviour
         server.useWebSockets = useWebSockets;
         server.Configure(connectionConfig, maxConnections);
         if (serverBindToIP && !string.IsNullOrEmpty(serverBindAddress))
-            return isNetworkActive = server.Listen(serverBindAddress, networkPort);
+            isNetworkActive = server.Listen(serverBindAddress, networkPort);
         else
-            return isNetworkActive = server.Listen(networkPort);
+            isNetworkActive = server.Listen(networkPort);
+
+        return isNetworkActive;
     }
 
-    public NetworkClient StartClient()
+    public virtual NetworkClient StartClient()
     {
         if (client != null)
             return client;
@@ -49,7 +59,7 @@ public class NetworkManagerSimple : MonoBehaviour
         return client;
     }
 
-    public NetworkClient StartHost()
+    public virtual NetworkClient StartHost()
     {
         OnStartHost();
         if (StartServer())
@@ -127,7 +137,9 @@ public class NetworkManagerSimple : MonoBehaviour
     protected virtual void OnServerConnectCallback(NetworkMessage netMsg)
     {
         if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnServerConnectCallback"); }
-
+        if (isServerConnected)
+            return;
+        isServerConnected = true;
         netMsg.conn.SetMaxDelay(maxDelay);
         OnServerConnect(netMsg.conn);
     }
@@ -135,7 +147,9 @@ public class NetworkManagerSimple : MonoBehaviour
     protected virtual void OnServerDisconnectCallback(NetworkMessage netMsg)
     {
         if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnServerDisconnectCallback"); }
-
+        if (!isServerConnected)
+            return;
+        isServerConnected = false;
         OnServerDisconnect(netMsg.conn);
     }
 
@@ -143,8 +157,8 @@ public class NetworkManagerSimple : MonoBehaviour
     {
         if (LogFilter.logDebug) { Debug.Log("NetworkManagerSimple:OnServerErrorCallback"); }
 
-        netMsg.ReadMessage(ErrorMessage);
-        OnServerError(netMsg.conn, ErrorMessage.errorCode);
+        netMsg.ReadMessage(errorMessage);
+        OnServerError(netMsg.conn, errorMessage.errorCode);
     }
 
     // ----------------------------- Client System Message Handlers --------------------------------
@@ -168,8 +182,8 @@ public class NetworkManagerSimple : MonoBehaviour
     {
         if (LogFilter.logDebug) { Debug.Log("HLNetworkManager:OnClientErrorCallback"); }
 
-        netMsg.ReadMessage(ErrorMessage);
-        OnClientError(netMsg.conn, ErrorMessage.errorCode);
+        netMsg.ReadMessage(errorMessage);
+        OnClientError(netMsg.conn, errorMessage.errorCode);
     }
 
     // ----------------------------- Server System Callbacks --------------------------------
