@@ -183,31 +183,55 @@ public class NetworkManagerSimple : MonoBehaviour
     }
 
     // ----------------------------- Server System Callbacks --------------------------------
-
+    /// <summary>
+    /// Called on the server when a new client connects.
+    /// </summary>
+    /// <param name="conn"></param>
     public virtual void OnServerConnect(NetworkConnection conn)
     {
     }
 
+    /// <summary>
+    /// Called on the server when a client disconnects.
+    /// </summary>
+    /// <param name="conn"></param>
     public virtual void OnServerDisconnect(NetworkConnection conn)
     {
 
     }
 
+    /// <summary>
+    /// Called on the server when a network error occurs for a client connection.
+    /// </summary>
+    /// <param name="conn"></param>
+    /// <param name="errorCode"></param>
     public virtual void OnServerError(NetworkConnection conn, int errorCode)
     {
     }
 
     // ----------------------------- Client System Callbacks --------------------------------
-
+    /// <summary>
+    /// Called on the client when connected to a server.
+    /// </summary>
+    /// <param name="conn"></param>
     public virtual void OnClientConnect(NetworkConnection conn)
     {
     }
 
+    /// <summary>
+    /// Called on clients when disconnected from a server.
+    /// </summary>
+    /// <param name="conn"></param>
     public virtual void OnClientDisconnect(NetworkConnection conn)
     {
         StopClient();
     }
 
+    /// <summary>
+    /// Called on clients when a network error occurs.
+    /// </summary>
+    /// <param name="conn"></param>
+    /// <param name="errorCode"></param>
     public virtual void OnClientError(NetworkConnection conn, int errorCode)
     {
     }
@@ -217,27 +241,45 @@ public class NetworkManagerSimple : MonoBehaviour
     // Since there are multiple versions of StartServer, StartClient and StartHost, to reliably customize
     // their functionality, users would need override all the versions. Instead these callbacks are invoked
     // from all versions, so users only need to implement this one case.
-
+    /// <summary>
+    /// This hook is invoked when a host is started.
+    /// </summary>
     public virtual void OnStartHost()
     {
     }
 
+    /// <summary>
+    /// This hook is invoked when a server is started - including when a host is started.
+    /// </summary>
     public virtual void OnStartServer()
     {
     }
 
+    /// <summary>
+    /// This is a hook that is invoked when the client is started.
+    /// </summary>
+    /// <param name="client"></param>
     public virtual void OnStartClient(NetworkClient client)
     {
     }
 
+    /// <summary>
+    /// This hook is called when a server is stopped - including when a host is stopped.
+    /// </summary>
     public virtual void OnStopServer()
     {
     }
 
+    /// <summary>
+    /// This hook is called when a client is stopped.
+    /// </summary>
     public virtual void OnStopClient()
     {
     }
 
+    /// <summary>
+    /// This hook is called when a host is stopped.
+    /// </summary>
     public virtual void OnStopHost()
     {
     }
