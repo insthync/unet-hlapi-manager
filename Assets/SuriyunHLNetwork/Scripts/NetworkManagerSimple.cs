@@ -9,7 +9,6 @@ public class NetworkManagerSimple : MonoBehaviour
     protected NetworkServerSimple server = null;
     protected NetworkClient client = null;
     public bool isNetworkActive { get; protected set; }
-    public bool isServerConnected { get; protected set; }
 
     public bool useWebSockets;
     public string networkAddress = "localhost";
