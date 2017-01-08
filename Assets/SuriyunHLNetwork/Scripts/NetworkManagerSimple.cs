@@ -6,8 +6,8 @@ using System.Collections;
 public class NetworkManagerSimple : MonoBehaviour
 {
     protected ErrorMessage errorMessage = new ErrorMessage();
-    protected NetworkServerSimple server = null;
-    protected NetworkClient client = null;
+    public NetworkServerSimple server { get; protected set; }
+    public NetworkClient client { get; protected set; }
     public bool isNetworkActive { get; protected set; }
 
     public bool useWebSockets;
@@ -281,5 +281,15 @@ public class NetworkManagerSimple : MonoBehaviour
     /// </summary>
     public virtual void OnStopHost()
     {
+    }
+
+    public bool IsServerActive()
+    {
+        return server != null;
+    }
+
+    public bool IsClientActive()
+    {
+        return client != null;
     }
 }
