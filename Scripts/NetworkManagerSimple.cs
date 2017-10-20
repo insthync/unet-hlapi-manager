@@ -72,7 +72,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
     NetworkClient ConnectLocalClient()
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple StartHost port:" + networkPort); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple StartHost port:" + networkPort);
         networkAddress = "localhost";
         return StartClient();
     }
@@ -94,7 +94,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
         OnStopServer();
 
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple StopServer"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple StopServer");
         server.Stop();
         server = null;
     }
@@ -108,7 +108,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
         OnStopClient();
 
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple StopClient"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple StopClient");
         // only shutdown this client, not ALL clients.
         client.Disconnect();
         client.Shutdown();
@@ -135,7 +135,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnServerConnectCallback(NetworkMessage netMsg)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnServerConnectCallback"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnServerConnectCallback");
 
         netMsg.conn.SetMaxDelay(maxDelay);
         OnServerConnect(netMsg.conn);
@@ -143,14 +143,14 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnServerDisconnectCallback(NetworkMessage netMsg)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnServerDisconnectCallback"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnServerDisconnectCallback");
 
         OnServerDisconnect(netMsg.conn);
     }
 
     protected virtual void OnServerErrorCallback(NetworkMessage netMsg)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnServerErrorCallback"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnServerErrorCallback");
 
         netMsg.ReadMessage(errorMessage);
         OnServerError(netMsg.conn, errorMessage.errorCode);
@@ -160,7 +160,7 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnClientConnectCallback(NetworkMessage netMsg)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnClientConnectCallback"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnClientConnectCallback");
 
         netMsg.conn.SetMaxDelay(maxDelay);
         OnClientConnect(netMsg.conn);
@@ -168,14 +168,14 @@ public class NetworkManagerSimple : MonoBehaviour
 
     protected virtual void OnClientDisconnectCallback(NetworkMessage netMsg)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnClientDisconnectCallback"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnClientDisconnectCallback");
 
         OnClientDisconnect(netMsg.conn);
     }
 
     protected virtual void OnClientErrorCallback(NetworkMessage netMsg)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnClientErrorCallback"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnClientErrorCallback");
 
         netMsg.ReadMessage(errorMessage);
         OnClientError(netMsg.conn, errorMessage.errorCode);
@@ -188,7 +188,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="conn"></param>
     public virtual void OnServerConnect(NetworkConnection conn)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnServerConnect"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnServerConnect");
     }
 
     /// <summary>
@@ -197,7 +197,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="conn"></param>
     public virtual void OnServerDisconnect(NetworkConnection conn)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnServerDisconnect"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnServerDisconnect");
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="errorCode"></param>
     public virtual void OnServerError(NetworkConnection conn, int errorCode)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnServerError"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnServerError");
     }
 
     // ----------------------------- Client System Callbacks --------------------------------
@@ -217,7 +217,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="conn"></param>
     public virtual void OnClientConnect(NetworkConnection conn)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnClientConnect"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnClientConnect");
     }
 
     /// <summary>
@@ -226,7 +226,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="conn"></param>
     public virtual void OnClientDisconnect(NetworkConnection conn)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnClientDisconnect"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnClientDisconnect");
         StopClient();
     }
 
@@ -237,7 +237,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="errorCode"></param>
     public virtual void OnClientError(NetworkConnection conn, int errorCode)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnClientError"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnClientError");
     }
 
     //------------------------------ Start & Stop callbacks -----------------------------------
@@ -250,7 +250,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// </summary>
     public virtual void OnStartHost()
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnStartHost"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnStartHost");
     }
 
     /// <summary>
@@ -258,7 +258,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// </summary>
     public virtual void OnStartServer()
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnStartServer"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnStartServer");
     }
 
     /// <summary>
@@ -267,7 +267,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// <param name="client"></param>
     public virtual void OnStartClient(NetworkClient client)
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnStartClient"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnStartClient");
     }
 
     /// <summary>
@@ -275,7 +275,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// </summary>
     public virtual void OnStopServer()
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnStopServer"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnStopServer");
     }
 
     /// <summary>
@@ -283,7 +283,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// </summary>
     public virtual void OnStopClient()
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnStopClient"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnStopClient");
     }
 
     /// <summary>
@@ -291,7 +291,7 @@ public class NetworkManagerSimple : MonoBehaviour
     /// </summary>
     public virtual void OnStopHost()
     {
-        if (writeLog) { Debug.Log("[" + name + "] NetworkManagerSimple:OnStopHost"); }
+        if (writeLog) Debug.Log("[" + name + "] NetworkManagerSimple:OnStopHost");
     }
 
     public bool IsServerActive()
